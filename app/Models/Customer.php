@@ -11,5 +11,5 @@ class Customer extends Model
 
     protected $table = "tb_customer";
     protected $id = "customer_id";
-    protected $fillablr = ['contact_name','address','city'];
+    protected $fillable = ['customer_name','contact_name','address','city'];
 }

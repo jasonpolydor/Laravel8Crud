@@ -17,7 +17,7 @@ class CustomerController extends Controller
     {
         $data['title'] = 'Customers';
         $data['q'] = $request->get('q');
-        $data['customer'] = Customer::get()->all();
+        $data['customers'] = Customer::where('customer_name','like','%'.$data['q'].'%')->get();
         Return view('customer.index', $data);
     }
 
@@ -28,7 +28,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        $data['title'] = 'Add Customer';
+        return view('customer.create', $data);
     }
 
     /**
@@ -39,7 +40,14 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'customer_name' => 'required',
+            'contact_name' => 'required'
+        ]);
+
+        $customer = new Customer($request->all());
+        $customer->save();
+        return redirect('customer')->with('success','Customer added successfully');
     }
 
     /**
@@ -61,7 +69,9 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        $data['title'] = "Edit Customer";
+        $data['customer'] = $customer;
+        return View('customer.edit', $data);
     }
 
     /**
@@ -73,7 +83,17 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $request->validate([
+            'customer_name' => 'required',
+            'contact_name' => 'required'
+        ]);
+
+        $customer->customer_name = $request->customer_name;
+        $customer->contact_name = $request->contact_name;
+        $customer->address = $request->address;
+        $customer->city = $request->city;
+        $customer->save();
+        return redirect('customer')->with('success','Customer updated successfully');
     }
 
     /**
