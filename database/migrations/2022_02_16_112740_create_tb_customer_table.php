@@ -14,12 +14,13 @@ class CreateTbCustomerTable extends Migration
     public function up()
     {
         Schema::create('tb_customer', function (Blueprint $table) {
-            $table->id('customer_id');
+            $table->id('id');
             $table->string('customer_name');
             $table->string('contact_name')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

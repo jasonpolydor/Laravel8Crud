@@ -37,8 +37,8 @@
                     <td>{{ $customer->address }}</td>
                     <td>{{ $customer->city }}</td>
                     <td>
-                        <a class="btn btn-warning btn-sm" href="{{ route('customer.edit', $customer->customer_id) }}"> Edit </a>
-                        <form method="POST" action="{{ route('customer.destroy', $customer->customer_id) }}" style="display:inline" 
+                        <a class="btn btn-warning btn-sm" href="{{ route('customer.edit', $customer) }}"> Edit </a>
+                        <form method="POST" action="{{ route('customer.destroy', $customer) }}" style="display:inline" 
                             onsubmit="return confirm('Delete?')">
                             @csrf
                             @method("DELETE")
